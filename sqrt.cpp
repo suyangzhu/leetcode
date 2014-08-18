@@ -23,7 +23,32 @@ float binarysqrt(float n) {
   return mid;
 }
 
+float Newton(float n) {
+  float val = n;
+  float last;
+  do {
+    last = val;
+    val = (val + n/val)/2;
+  }  while(abs(last-val) > 0.00001);
+  return val;
+}
+
+int NewtonInt(int n) {
+  int val = n;
+  int last;
+  do {
+    last = (val + n/val)/2;
+    if(last >= val)
+      break;
+    val = last;
+  } while (1);
+  return val;
+}
+
 int main() {
-  std::cout << binarysqrt(2) << std::endl;
+  int num;
+  while (1) {cin >> num;
+  std::cout << NewtonInt(num) << std::endl;
+  }
   return 0;
 }

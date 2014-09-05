@@ -1,46 +1,26 @@
 #include <iostream>
 #include <string>
 #include <unordered_set>
+#include <vector>
 using namespace std;
 class Solution {
 public:
     bool wordBreak(string s, unordered_set<string> &dict) {
-        int i;
-        int len = s.size();
-	int dictVolume = dict.size();
-	if (len == 0) 
-		return true;
-	if (dictVolume == 0)
-		return false;
-        string substr1;
-        string substr2;
-        if (dict.find(s) != dict.end()) 
-            return true;
-        // divided into two strings.
-	
-        for (unordered_set<string>::iterator it = dict.begin();
-		       			     it != dict.end(); 
-					     it++) {
-		std::size_t found = s.find(*it);
-		if (found == std::string::npos) {
-			continue;
-		}
-		if (found == 0) {
-			substr1 = s.substr((*it).size(), len-(*it).size());
-			std::cout << substr1 << std::endl;
-			if (wordBreak(substr1, dict))
-				return true;
-		} else {
-			substr1 = s.substr(0, found);
-			substr2 = s.substr(found+(*it).size(), len - substr1.size() - (*it).size());
-			std::cout << substr1 << std::endl;
-			std::cout << substr2 << std::endl;
-			std::cout << "substr1 " << substr1 << " substr2 " << substr2 << std::endl;
-			if (wordBreak(substr1, dict) && wordBreak(substr2, dict))
-				return true;
-		}
-        }
-        return false;
+	    string str = "#" + s;
+	    int len = str.size();
+	    vector<bool> possible(len, false);
+	    int i, k;
+
+	    possible[0] = true;
+	    for (i = 1; i < len; i++) {
+		    for (k = 0; k < i; k++) {
+			    possible[i] = possible[k] &&
+				    	  dict.find(s.substr(k+1, i-k)) != dict.end();
+			    if (possible[i])
+				    break;
+		    }
+	    }
+	    return possible[len-1];
     }
 };
 

@@ -55,7 +55,9 @@ public:
 			right = right->next;
 		}
 		ptr = ptr->next;
+		std::cout << "ptr: "<< ptr << std::endl;
 	    }
+	    ptr->next = NULL;
 	   ptr = head->next;
 	   return ptr; 
     }

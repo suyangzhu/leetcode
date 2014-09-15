@@ -18,15 +18,13 @@ class Solution {
 			result[0][0] = true;
 			return result;
 		} else {
-			for (i = 0; i < len; i++)
-				result[i][i] = true;
-			for (i = 0; i < len; i++) {
+			for (i = len-1; i  >= 0; i--) {
 				for (j = i; j < len; j++) {
 					if (j == i) 
 						result[i][j] = true;
 					else
 					if (j == i+1) {
-						result[i][j] = word[i] == word[j];
+						result[i][j] = (word[i] == word[j]);
 						result[j][i] = result[i][j];
 					} else {
 						result[i][j] = (word[i]==word[j]) && result[i+1][j-1];
@@ -37,6 +35,27 @@ class Solution {
 		}
 		return result;
 	}
+	    int minCut(string s) {
+        int len = s.size();
+        int Cut[len+1];
+        bool isPalindrome[len][len];
+        int i;
+        for (i = 0; i <=len; i++) {
+            Cut[i] = len - i;
+        }
+        for (i = 0; i < len; i++)
+            for (j = 0; j < len; j++)
+                isPalindrome[i][j] = false;
+        for (i = len-1; i >=0; i--) {
+            for (j = i; j < len; j++) {
+                if (s[i] == s[j] && (j-i<2||isPalindrome[i+1][j-1])) {
+                    Cut[i] = min(Cut[i], Cut[j+1]+1);
+                    isPalindrome[i][j] = true;
+                }
+            }
+        }
+        return Cut[0]-1;
+    }
 };
 
 int main() {

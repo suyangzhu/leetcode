@@ -1,0 +1,23 @@
+Sep 18 2014
+- Second time 
+  Divide Two Integers:
+  abs(INT_MIN) will not return INT_MAX
+
+  Decode Ways:
+  DP
+
+  String to Integer:
+  Take care of INT_MIN, INT_MAX.
+
+  Surrounded Regions: 
+  Starting from the boundary.
+
+  Reverse Words in a sring: 
+  String tokenizer.
+
+  Max Points on a Line:
+  Overlapping points.
+  
+  3Sum:
+  From two sides to the middle.
+  

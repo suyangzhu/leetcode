@@ -6,63 +6,59 @@
 using namespace std;
 // dual pointers. Shift the second one until contains all 
 // chars in T. Then shift the first one. record then first = second.
-class Solution { 
-	public:
-		bool hasAll(vector<int> &cnt, vector<int> &cntT) {
-			int i; 
-			for (i = 0; i < 256; i++)
-				if (cntT[i] && cnt[i] < cntT[i])
-					return false;
-			return true;
-		}	
-		string minWindow(string S, string T) {
-			int len1 = S.size();
-			int len2 = T.size();
-			if (len1 < len2) 
-				return "";
-			vector<int> cnt(256,0);
-			vector<int> cntT(256, 0); 
-			int i = 0, j=0, k;
-			int beg = 0;
-			int end = len1-1;
-			int internal = INT_MAX;
-			for (i = 0; i < len2; i++) 
-				cntT[T[i]]++;
-			i = 0;
-			
-			while (i < len1) {
-				// pay attention that even if S[i] does not exisit in 
-				// map, wordCnt[S[i]] returns 0
-				cnt[S[i]]++;
-				if (!hasAll(cnt, cntT)) {
-					i++;
-					continue;
-				} else { 
-					while(1) {
-						cnt[S[j]]--;
-						if (j < len1 && cnt[S[j]] < cntT[S[j]])
-							break;
-						j++;
-					}
-					if (i-j+1 < internal) {
-						internal= i-j+1;
-						beg = j;
-						end = i;
-						i++;
-						j++;
-					} else {
-						i++;
-						j++;
-					}
-				}			
-			}
-			 
-			if (internal != INT_MAX)
-				return S.substr(beg, internal);
-			else 
-				return "";
-			
-		}
+// Instead of using unordered_map, use an 256 array to be the hashmap.
+class Solution {
+public:
+    bool CoverAllCharacters(vector<int> &count, vector<int> &countT) {
+        int i;
+        for (i = 0; i < 256; i++) {
+            if (countT[i] && count[i] < countT[i]) return false;
+        }
+        return true;
+    }
+    string minWindow(string S, string T) {
+        int i, j;
+        int minSize = INT_MAX;
+        vector<int> count(256, 0);
+        vector<int> countT(256, 0);
+        int sSize = S.size();
+        int tSize = T.size();
+        int begin = 0;
+        int end = 0;
+        string result = "";
+        if (sSize < tSize)
+            return result;
+        if (tSize == 0) return result;
+        for (i = 0; i < tSize; i++) {
+            countT[T[i]]++;
+        }
+        i = 0; j = 0;
+        while (i < sSize) {
+		std::cout << i << std::endl;
+            count[S[i]]++;
+            if (!CoverAllCharacters(count, countT)) {
+                i++;
+		continue;
+            } else {
+                while (1) {
+                    count[S[j]]--;
+                    if (j < sSize && count[S[j]] < countT[S[j]]) break;
+                    j++;
+                }
+                if (i-j+1<minSize) {
+                    minSize = i-j+1;
+                    begin = j;
+                    i++;
+                    j++;
+                }  else {
+                    i++;
+                    j++;
+                }
+            }
+        }
+        if (minSize != INT_MAX)  return S.substr(begin, minSize);
+        else    return "";
+    }
 };
 int main() {
 	string S = "ADOBECODEBANC";

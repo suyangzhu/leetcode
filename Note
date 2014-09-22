@@ -20,4 +20,10 @@ Sep 18 2014
   
   3Sum:
   From two sides to the middle.
-  
+
+Sep 20&21:
+  Longest Palindrome Substring: 
+  cannot AC using DP.
+
+  Merge sort linkedlist:
+  the key is hwo to deal with the root situation: len == 1. return a singleton.

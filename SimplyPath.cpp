@@ -6,62 +6,67 @@ using namespace std;
 
 class Solution {
 public:
-    string simplifyPath(string path) {
-        int len = path.size();
-        int i;
-        string result = "";
-        vector<string> vecPath;
-        stack<string> stackPath;
-	// FSM to parse every seg in directory.
-        for (i = 0; i < len; i++) {
+/**
+ * a stack. parse words using '/'
+ * if word == '.' do nothing
+ * if word == '..', pop the top 
+ */ 
+    vector<string> StringTokenizer(string &path) {
+        int pathLength = path.size();
+        vector<string> result;
+        if (pathLength == 0) return result;
+        int i = 0;
+        while (i < pathLength) {
             if (path[i] == '/') {
-                string seg = "";
-		// i must increase by 1;
-		i++;
-                while (i < len && path[i] != '/') {
-                    seg = seg + path[i++];
+                while (i<pathLength && path[i] == '/') i++;  // eliminate duplicate '/'
+                int start = i;
+                while(i < pathLength && path[i] != '/') {
+                    i++;
                 }
-		// i must deduce by 1;
-		if (i < len && path[i] == '/') {
-			i--;
-		}
-		if (seg.size())
-                	vecPath.push_back(seg);
-            }
-        }
-	
-        int size = vecPath.size();
-	for (i = 0; i < size; i++) 
-		std::cout << vecPath[i] << std::endl;
-        for (i = 0; i < size; i++) {
-            if (vecPath[i] == ".") {
-                continue;
-            } else
-            if (vecPath[i] == "..") {
-                if (stackPath.empty()) 
-                    continue;
-                else {
-                    stackPath.pop();
+                if (i>start) {
+                    string sub = path.substr(start, i-start);
+                    result.push_back(sub);
                 }
-            } else {
-                stackPath.push(vecPath[i]);
             }
-        }
-	if (stackPath.empty()) {
-		result = "/";
-		return result;
-	}
-        while (!stackPath.empty()) {
-            result = "/"+ stackPath.top()+result;
-            stackPath.pop();
         }
         return result;
     }
+    string simplifyPath(string path) {
+        vector<string> directory = StringTokenizer(path);
+        int directoryCount = directory.size();
+        if (directoryCount == 0 ) return "/";
+        stack<string> directoryStack;
+        int i;
+        for (i = 0; i < directoryCount; i++) {
+            if (directory[i] == ".") {
+                continue;
+            } else 
+            if (directory[i] == ".." && directoryStack.empty()) {
+                continue;
+            } else 
+            if (directory[i] == "..") {
+                directoryStack.pop();
+            } else {
+                directoryStack.push(directory[i]);
+            }
+        }
+        directoryCount = directoryStack.size();
+        if (directoryCount == 0) return "/";
+        else 
+        if (directoryCount == 1) return "/"+directoryStack.top();
+        else {
+            string result = "";
+            while (!directoryStack.empty()) {
+                result = "/" +directoryStack.top()+result;
+                directoryStack.pop();
+            }
+            return result;
+        }
+    }
 };
-
 int main() {
 	Solution sol;
-	std::cout << sol.simplifyPath("/.") << std::endl;
+	std::cout << sol.simplifyPath("/../a/b/..//") << std::endl;
 	return 0;
 }
 

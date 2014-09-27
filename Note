@@ -36,3 +36,6 @@ Sep 22&&23
   Need to take another look.
 Sep 24
   Unsolve N-queens, Pow(x), sqrt(x) 
+Sep 26
+  Unsolve Sudoku solver. Valid Sudoku. Need to do iteration solution for 
+  inorder tree, pre order and post order.

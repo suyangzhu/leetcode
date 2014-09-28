@@ -39,3 +39,10 @@ Sep 24
 Sep 26
   Unsolve Sudoku solver. Valid Sudoku. Need to do iteration solution for 
   inorder tree, pre order and post order.
+
+  Longest Consecutive Sequence:
+  I did it using set to sort the array. If sorting using insert of set, can
+  it reaches O(1) complexity?  Need to take another look at optimized 
+  solution.
+  
+  

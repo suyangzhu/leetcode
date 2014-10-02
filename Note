@@ -51,4 +51,15 @@ Sep 26
 
 Oct 2nd.
   Palindrome Partitioning II second time take referrence to answer.
+  Skip:: Candy, Spiral Matrix, Sudoku Solver.
+
+  To check if the word exists on a chess, we need to maintain a visited
+  map to avoid circles. Besides we need to check if x, y is on the chess
+  before we compare word[idx] and board[x][y]
+
+  Regular expression. Need to understand the recursion solution.
+
+  Binary Tree Maximum Path Sum, the init value should set to INT_MIN.
+  The current maxsum through root may not be the largest one. so do not 
+  pick it without comparison.
 

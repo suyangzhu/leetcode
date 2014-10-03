@@ -63,3 +63,7 @@ Oct 2nd.
   The current maxsum through root may not be the largest one. so do not 
   pick it without comparison.
 
+  MultiplyTwo Strings: take care of carries every cycle of computation.
+
+  How to merge sort a linked list. ** head !!
+

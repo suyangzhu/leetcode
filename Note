@@ -67,3 +67,21 @@ Oct 2nd.
 
   How to merge sort a linked list. ** head !!
 
+  Insert Intervals ---> Merge Interval (keep inserting next to the
+		        already-sorted interval serial)
+  Merge Intervals---> Insert Interval (Put the insertion at the end, then
+		        sort the whole serial.)
+
+  Longest Palindrome substring in string: Manacher's algorithm.
+
+  WordBreak: DFS solution vs DP solution.
+
+  Laregest Histogram Area: Take care of the priority of a?b:c; must apply
+  parenthese in some situation.
+
+  4 sum: base on 3 sum; however must check duplication.
+
+  StrStr the end of string should be '\0' , not '0'
+
+
+

@@ -81,7 +81,12 @@ Oct 2nd.
 
   4 sum: base on 3 sum; however must check duplication.
 
-  StrStr the end of string should be '\0' , not '0'
+  StrStr the end of string should be '\0' , not '0'. To be same, use 
+  !*ptr instead of *ptr == '\0'
+
+  RecoverBinarySearchTree: need to think about constant space.
+
+  ZigZag skipped it once more^_^
 
 
 

@@ -88,5 +88,12 @@ Oct 2nd.
 
   ZigZag skipped it once more^_^
 
+  Distinct Subsequence: pay attention to the first row of matrix and the 
+  coordinate. we should cmp T[i-1] && S[j-1] since the index starts from
+  0.
 
+  Permutation II: How to filter duplicates. Sort first. If element i == 
+  element i-1 and element i-1 has not been visited before. Do not use 
+  element i. 
 
+  N-Queens and Pow skipped.

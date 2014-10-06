@@ -96,4 +96,5 @@ Oct 2nd.
   element i-1 and element i-1 has not been visited before. Do not use 
   element i. 
 
-  N-Queens and Pow skipped.
+  N-Queens and Pow skipped. Palindrome Partitioning need to take a second 
+  look at.

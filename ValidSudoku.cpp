@@ -7,80 +7,158 @@
 using namespace std;
 class Solution {
 public:
-// sort and then see if repeating.
-    bool hasRepeat(vector<char>& row) {
-        int size = row.size();
-        if (size == 0) 
-            return false;
-        int i;
-        sort(row.begin(), row.end());
-        for (i = 0; i < size - 1; i++) {
-            if(row[i] != '.' && row[i] == row[i+1])
-                return true;
-        }
-        return false;
+    void Reset(vector<int> &vec) {
+        for (int i = 0; i < vec.size();i++) vec[i] = 0;
     }
-    bool isValidSudoku(vector<vector<char> > &board) {
-        int rowNum = board.size();
-        if (rowNum == 0) 
-            return true;
-        int colNum = board[0].size();
-        int i;
-        int j;
-        std::cout << "rowNum " << rowNum << " colNum  " << colNum << std::endl; 
-        for (i = 0; i < rowNum; i++) {
-            vector<char> col;
-            std::cout << "3" << std::endl;
-            for (j = 0; j < colNum; i++) {
-              std::cout << "colNum  " << colNum  << "  " << i <<  "  " << j << std::endl;
-              std::cout << board[i][j] << std::endl;
-  //              col.push_back(board[i][j]);
+    bool isValidSudoku(const vector<vector<char> > &board) {
+        vector<int> cnt(10, 0);
+        // check row && column;
+        for (int i = 0; i < 9; i++) {
+            Reset(cnt);
+            for (int j = 0; j < 9; j++) {
+		    std::cout << i << " " << j << board[i][j] << std::endl;
+                if (board[i][j] != '.') {
+			
+                    if (cnt[board[i][j]-'0']) {
+			    std::cout <<"1" << std::endl;
+			    return false;
+		    }
+		    
+                    cnt[board[i][j]-'0']++;
+                }
             }
-            std::cout << "2" << std::endl;
-            if (hasRepeat(col)) {
-                return false;
+	} 
+	std::cout << "end line" <<std::endl;
+	for (int i = 0; i < 9; i++) {
+            Reset(cnt);
+            for (int j = 0; j < 9; j++) {
+                if (board[j][i] != '.') {
+			std::cout <<j << " " << i << " " << board[j][i] << std::endl;
+                    if (cnt[board[j][i]-'0']) {
+			    std::cout << j <<" " << i << " " << cnt[board[j][i]-'0'] << " " <<board[j][i] <<std::endl;
+			    std::cout <<"2" <<std::endl;
+			    return false;
+		    }
+                    cnt[board[j][i]-'0']++;
+		}
+                
             }
         }
-        std::cout << "1" << std::endl;
-        for (i = 0; i < rowNum; i++) {
-            if (hasRepeat(board[i]))
-                return false;
+        // check squre;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                int xBegin = 3*i;
+                int yBegin = 3*j;
+                Reset(cnt);
+                for (int m = 0; m < 3; m++) {
+                    for (int n = 0; n < 3; n++) {
+                        if (board[xBegin+m][yBegin+n] != '.') {
+                            if (cnt[board[xBegin+m][yBegin+n]-'0']) {
+				    std::cout <<"3" <<std::endl;
+				    return false;
+			    }
+                            cnt[board[xBegin+m][yBegin+n]-'0']++;
+                        }
+                    }
+                }
+            }
         }
         return true;
     }
 };
-
 int main() {
   vector<vector<char> > board;
   vector<char> s1;
   s1.push_back('.');
+  s1.push_back('8');
+  s1.push_back('7');
+  s1.push_back('6');
+  s1.push_back('5');
+  s1.push_back('4');
+  s1.push_back('3');
+  s1.push_back('2');
   s1.push_back('1');
-  vector<char> s2;
-  s2.push_back('2');
-  s2.push_back('.');
-
-  /*
-  vector<char> s2('2', '.', '.', '.', '.', '.', '.', '.', '.');
-  vector<char> s3('3', '.', '.', '.', '.', '.', '.', '.', '.');
-  vector<char> s4('4', '.', '.', '.', '.', '.', '.', '.', '.');
-  vector<char> s5('5', '.', '.', '.', '.', '.', '.', '.', '.');
-  vector<char> s6('6', '.', '.', '.', '.', '.', '.', '.', '.');
-  vector<char> s7('7', '.', '.', '.', '.', '.', '.', '.', '.');
-  vector<char> s8('8', '.', '.', '.', '.', '.', '.', '.', '.');
-  vector<char> s9('9', '.', '.', '.', '.', '.', '.', '.', '.');
-  */
   board.push_back(s1);
-  board.push_back(s2);
-  /*
-  board.push_back(s2);
-  board.push_back(s3);
-  board.push_back(s4);
-  board.push_back(s5);
-  board.push_back(s6);
-  board.push_back(s7);
-  board.push_back(s8);
-  board.push_back(s9);
-*/
+  s1[0] = '2';
+  s1[1] = '.';
+  s1[2] = '.';
+  s1[3] = '.';
+  s1[4] = '.';
+  s1[5] = '.';
+  s1[6] = '.';
+  s1[7] = '.';
+  s1[8] = '.';
+  board.push_back(s1);
+  s1[0] = '3';
+  s1[1] = '.';
+  s1[2] = '.';
+  s1[3] = '.';
+  s1[4] = '.';
+  s1[5] = '.';
+  s1[6] = '.';
+  s1[7] = '.';
+  s1[8] = '.';
+  board.push_back(s1);
+  s1[0] = '4';
+  s1[1] = '.';
+  s1[2] = '.';
+  s1[3] = '.';
+  s1[4] = '.';
+  s1[5] = '.';
+  s1[6] = '.';
+  s1[7] = '.';
+  s1[8] = '.';
+  board.push_back(s1);
+  s1[0] = '5';
+  s1[1] = '.';
+  s1[2] = '.';
+  s1[3] = '.';
+  s1[4] = '.';
+  s1[5] = '.';
+  s1[6] = '.';
+  s1[7] = '.';
+  s1[8] = '.';
+  board.push_back(s1);
+  s1[0] = '6';
+  s1[1] = '.';
+  s1[2] = '.';
+  s1[3] = '.';
+  s1[4] = '.';
+  s1[5] = '.';
+  s1[6] = '.';
+  s1[7] = '.';
+  s1[8] = '.';
+  board.push_back(s1);
+  s1[0] = '7';
+  s1[1] = '.';
+  s1[2] = '.';
+  s1[3] = '.';
+  s1[4] = '.';
+  s1[5] = '.';
+  s1[6] = '.';
+  s1[7] = '.';
+  s1[8] = '.';
+  board.push_back(s1);
+  s1[0] = '8';
+  s1[1] = '.';
+  s1[2] = '.';
+  s1[3] = '.';
+  s1[4] = '.';
+  s1[5] = '.';
+  s1[6] = '.';
+  s1[7] = '.';
+  s1[8] = '.';
+  board.push_back(s1);
+  s1[0] = '9';
+  s1[1] = '.';
+  s1[2] = '.';
+  s1[3] = '.';
+  s1[4] = '.';
+  s1[5] = '.';
+  s1[6] = '.';
+  s1[7] = '.';
+  s1[8] = '.';
+  board.push_back(s1);
 
   Solution sol;
   if (sol.isValidSudoku(board)) 
@@ -91,15 +169,6 @@ int main() {
 
 }
 
-"....5..1.",
-".4.3.....",
-".....3..1",
-"8......2.",
-"..2.7....",
-".15......",
-".....2...",
-".2.9.....",
-"..4......"
 
 
 

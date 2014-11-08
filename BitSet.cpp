@@ -27,9 +27,9 @@ private:
 };
 
 int main() {
-	std::bitset<5> foo(std::string("01011"));
-	for (int i = 0; i < foo.size(); i++) {
-		std::cout << foo.test(i) <<std::endl;
-	}
+	std::bitset<1000> foo(std::string("01011"));
+	std::cout << sizeof(foo) << std::endl;
+	int a;
+	std::cout << "a : " << sizeof(a) << std::endl;
 	return 0;
 }

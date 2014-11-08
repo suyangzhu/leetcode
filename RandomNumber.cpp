@@ -19,5 +19,14 @@ int Rand7() {
 		
 }
 
+int Rand7() {
+	while (1) {
+		int num = 5 * Rand5() + Rand(5);
+		if (num < 21) {
+			return num % 7;
+		}
+	}	
+}
+
 // solution 2
 we can create a binary tree. This only applies to Rand4 based on Rand2. 

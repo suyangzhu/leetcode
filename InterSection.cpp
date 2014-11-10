@@ -16,23 +16,30 @@ vector<int> InterSection(int* A, int* B, int n) {
 			idxB++;
 		} else 
 		if (A[idxA] > B[idxB]) {
-			result.push_back(B[idxB++]);
-			while (idxB < n && B[idxB-1] == B[idxB]) idxB++;
+			result.push_back(B[idxB]);
+			idxB++;
+			while (B[idxB-1] == B[idxB]) idxB++;
 		} else {
+			result.push_back(A[idxA]);
 			idxA++;
+			while (A[idxA-1] == A[idxA]) idxA++;
 		}
 	}
+	while (idxA < n) {
+		result.push_back(A[idxA]);
+		idxA++;
+	}
 	while (idxB < n) {
-		result.push_back(B[idxB++]);
-		while (idxB < n && B[idxB-1] == B[idxB]) idxB++;
+		result.push_back(B[idxB]);
+		idxB++;
 	}
 	return result;
 }
 
 int main() {
-	int A[5] = {1, 2, 3, 3, 3};
-	int B[5] = {3, 2, 1, 6, 6};
-	vector<int> result = InterSection(A, B, 5);
+	int A[7] = {1, 2, 3, 5, 5, 7, 8};
+	int B[7] = {3, 2, 1, 4, 4, 6, 7};
+	vector<int> result = InterSection(A, B, 7);
 	for (int i = 0; i < result.size(); i++) {
 		std::cout << result[i] << " ";
 	}
